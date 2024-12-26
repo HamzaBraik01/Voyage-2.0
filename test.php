@@ -8,67 +8,34 @@
 </head>
 <body class="min-h-screen flex flex-col">
     <!-- Navigation -->
-    <nav class="bg-white shadow-md fixed w-full z-50">
+    <nav class="bg-white shadow fixed w-full z-50">
         <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center h-20">
+            <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
-                <div class="flex items-center space-x-2">
-                    <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                    <span class="text-2xl font-bold text-blue-600">VoyageHub</span>
-                </div>
+                <a href="#" class="text-2xl font-bold text-blue-600">VoyageHub</a>
 
                 <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="text-gray-600 hover:text-blue-600 transition duration-300">Accueil</a>
-                    <a href="#about" class="text-gray-600 hover:text-blue-600 transition duration-300">À propos</a>
-                    <a href="#reservation" class="text-gray-600 hover:text-blue-600 transition duration-300">Réservation</a>
-                    <a href="#contact" class="text-gray-600 hover:text-blue-600 transition duration-300">Contact</a>
-                    
-                    <!-- Auth Buttons -->
-                    <div class="flex items-center space-x-4">
-                        <a href="#" class="flex items-center text-gray-600 hover:text-blue-600 transition duration-300">
-                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                            <span>Connexion</span>
-                        </a>
-                        <a href="#" class="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
-                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                            </svg>
-                            <span>Inscription</span>
-                        </a>
-                    </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-600 hover:text-blue-600">Accueil</a>
+                    <a href="#about" class="text-gray-600 hover:text-blue-600">À propos</a>
+                    <a href="#reservation" class="text-gray-600 hover:text-blue-600">Réservation</a>
+                    <a href="#contact" class="text-gray-600 hover:text-blue-600">Contact</a>
                 </div>
 
-                <!-- Mobile Menu Button and Icons -->
-                <div class="flex items-center space-x-4 md:hidden">
-                    <a href="#" class="text-gray-600 hover:text-blue-600 transition duration-300">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                    </a>
-                    <a href="#" class="text-gray-600 hover:text-blue-600 transition duration-300">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                        </svg>
-                    </a>
-                    <button id="mobile-menu-button" class="text-gray-600 hover:text-blue-600 transition duration-300">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
-                </div>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
             </div>
 
             <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden md:hidden pb-6">
-                <a href="#home" class="block py-3 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition duration-300">Accueil</a>
-                <a href="#about" class="block py-3 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition duration-300">À propos</a>
-                <a href="#reservation" class="block py-3 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition duration-300">Réservation</a>
-                <a href="#contact" class="block py-3 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition duration-300">Contact</a>
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <a href="#home" class="block py-2 text-gray-600">Accueil</a>
+                <a href="#about" class="block py-2 text-gray-600">À propos</a>
+                <a href="#reservation" class="block py-2 text-gray-600">Réservation</a>
+                <a href="#contact" class="block py-2 text-gray-600">Contact</a>
             </div>
         </div>
     </nav>
@@ -198,6 +165,7 @@
     </footer>
 
     <script>
+        // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
 

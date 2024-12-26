@@ -27,34 +27,10 @@
                     <a href="#contact" class="text-gray-600 hover:text-blue-600 transition duration-300">Contact</a>
                     
                     <!-- Auth Buttons -->
-                    <div class="flex items-center space-x-4">
-                        <a href="#" class="flex items-center text-gray-600 hover:text-blue-600 transition duration-300">
-                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                            <span>Connexion</span>
-                        </a>
-                        <a href="#" class="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
-                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                            </svg>
-                            <span>Inscription</span>
-                        </a>
-                    </div>
                 </div>
 
                 <!-- Mobile Menu Button and Icons -->
                 <div class="flex items-center space-x-4 md:hidden">
-                    <a href="#" class="text-gray-600 hover:text-blue-600 transition duration-300">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                    </a>
-                    <a href="#" class="text-gray-600 hover:text-blue-600 transition duration-300">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                        </svg>
-                    </a>
                     <button id="mobile-menu-button" class="text-gray-600 hover:text-blue-600 transition duration-300">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -72,83 +48,34 @@
             </div>
         </div>
     </nav>
-
-    <!-- Main Content -->
-    <main class="flex-grow pt-16">
-        <!-- Hero Section -->
-        <section id="home" class="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-20">
-            <div class="container mx-auto px-4 text-center">
-                <h1 class="text-4xl md:text-6xl font-bold mb-6">Découvrez le monde avec nous</h1>
-                <p class="text-xl mb-8">Votre prochaine aventure commence ici</p>
-                <button class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50">
-                    Explorer
-                </button>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="py-16 px-4">
-            <div class="container mx-auto">
-                <h2 class="text-3xl font-bold text-center mb-8">À propos de nous</h2>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="bg-white p-6 rounded-lg shadow">
-                        <h3 class="text-xl font-semibold mb-4">Notre Mission</h3>
-                        <p class="text-gray-600">
-                            Nous nous engageons à vous offrir des expériences de voyage exceptionnelles.
-                        </p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow">
-                        <h3 class="text-xl font-semibold mb-4">Nos Valeurs</h3>
-                        <p class="text-gray-600">
-                            Qualité, authenticité et satisfaction client sont au cœur de notre approche.
-                        </p>
-                    </div>
+    <section class="flex pt-52  items-center justify-center h-screen">
+        <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg">
+        <h2 class="text-2xl font-bold text-center text-gray-700">Sign Up</h2>
+        <form id="signup-form"  action="register.php" method="POST">
+            <div class="space-y-4">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-600">Username</label>
+                    <input type="text" id="username" name="username" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Choose a username" />
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-600">Email</label>
+                    <input type="email" id="email" name="email" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Enter your email" />
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
+                    <input type="password" id="password" name="password" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Create a password" />
+                </div>
+                <div>
+                    <label for="confirm-password" class="block text-sm font-medium text-gray-600">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Confirm your password" />
                 </div>
             </div>
-        </section>
+            <button type="submit" class="w-full p-3 mt-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Sign Up</button>
+        </form>
+        <p class="text-center text-sm text-gray-600">Already have an account? <a href="login.php" class="text-blue-600 hover:underline">Sign In</a></p>
+    </section>
 
-        <!-- Reservation Section -->
-        <section id="reservation" class="py-16 px-4 bg-gray-100">
-            <div class="container mx-auto">
-                <h2 class="text-3xl font-bold text-center mb-8">Réservation</h2>
-                <div class="max-w-4xl mx-auto bg-white rounded-lg shadow p-6">
-                    <form class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
-                                Date de départ
-                            </label>
-                            <input type="date" class="w-full p-2 border rounded">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
-                                Date de retour
-                            </label>
-                            <input type="date" class="w-full p-2 border rounded">
-                        </div>
-                    </form>
-                    <button class="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700">
-                        Rechercher
-                    </button>
-                </div>
-            </div>
-        </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="py-16 px-4">
-            <div class="container mx-auto">
-                <h2 class="text-3xl font-bold text-center mb-8">Contact</h2>
-                <div class="max-w-4xl mx-auto bg-white rounded-lg shadow p-6">
-                    <form class="space-y-4">
-                        <input type="email" placeholder="Votre email" class="w-full p-2 border rounded">
-                        <textarea placeholder="Votre message" class="w-full p-2 border rounded" rows="4"></textarea>
-                        <button class="w-full bg-blue-600 text-white py-2 rounded font-semibold hover:bg-blue-700">
-                            Envoyer
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white">
@@ -198,6 +125,7 @@
     </footer>
 
     <script>
+        /*-----------------------------------------------------------------------*/
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
 
