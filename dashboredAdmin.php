@@ -23,18 +23,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $type = $_POST['type'];
     $image_url = $_POST['image_url'];
 
-    // Create an instance of the Activite class
+    
     $activite = new Activite($titre, $description, $prix, $date_debut, $date_fin, $place_dispo, $type, $image_url);
 
-    // Get the database connection
     $db = new Database();
     
-    // Call the method to add the activity to the database
     if ($activite->ajouterActivite($db)) {
-        // Success: Activity added
+        
         echo "Activity added successfully!";
     } else {
-        // Error: Activity not added
+    
         echo "There was an error adding the activity.";
     }
 }
