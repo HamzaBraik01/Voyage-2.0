@@ -48,34 +48,41 @@
             </div>
         </div>
     </nav>
-    <section class="flex pt-52  items-center justify-center h-screen">
+    <section class="flex pt-52 items-center justify-center h-screen">
         <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg">
-        <h2 class="text-2xl font-bold text-center text-gray-700">Sign Up</h2>
-        <form id="signup-form"  action="register.php" method="POST">
-            <div class="space-y-4">
-                <div>
-                    <label for="username" class="block text-sm font-medium text-gray-600">Username</label>
-                    <input type="text" id="username" name="username" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Choose a username" />
+            <h2 class="text-2xl font-bold text-center text-gray-700">Sign Up</h2>
+            <form id="signup-form" action="register.php" method="POST">
+                <div class="space-y-4">
+                    <div>
+                        <label for="nom" class="block text-sm font-medium text-gray-600">Nom</label>
+                        <input type="text" id="nom" name="nom" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Entrez votre nom" />
+                    </div>
+                    <div>
+                        <label for="prenom" class="block text-sm font-medium text-gray-600">Prénom</label>
+                        <input type="text" id="prenom" name="prenom" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Entrez votre prénom" />
+                    </div>
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-600">Username</label>
+                        <input type="text" id="username" name="username" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Choose a username" />
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-600">Email</label>
+                        <input type="email" id="email" name="email" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Enter your email" />
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
+                        <input type="password" id="password" name="password" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Create a password" />
+                    </div>
+                    <div>
+                        <label for="confirm-password" class="block text-sm font-medium text-gray-600">Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirm-password" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Confirm your password" />
+                    </div>
                 </div>
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-600">Email</label>
-                    <input type="email" id="email" name="email" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Enter your email" />
-                </div>
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
-                    <input type="password" id="password" name="password" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Create a password" />
-                </div>
-                <div>
-                    <label for="confirm-password" class="block text-sm font-medium text-gray-600">Confirm Password</label>
-                    <input type="password" id="confirm-password" name="confirm-password" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Confirm your password" />
-                </div>
-            </div>
-            <button type="submit" class="w-full p-3 mt-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Sign Up</button>
-        </form>
-        <p class="text-center text-sm text-gray-600">Already have an account? <a href="login.php" class="text-blue-600 hover:underline">Sign In</a></p>
+                <button type="submit" class="w-full p-3 mt-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Sign Up</button>
+            </form>
+            <p class="text-center text-sm text-gray-600">Already have an account? <a href="login.php" class="text-blue-600 hover:underline">Sign In</a></p>
+        </div>
     </section>
-
-
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white">
