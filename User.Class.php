@@ -1,55 +1,55 @@
 <?php
 require_once 'DB.Class.php';
+
 abstract class User {
     protected $id_user;
     protected $nom;
     protected $prenom;
-    protected $password;
-    protected $telephone;
-    protected $adresse;
     protected $date_naissance;
-    protected $archive;
+    protected $telephone;
+    protected $email;
+    protected $mot_de_passe;
+    protected $etat;
     protected $id_role;
 
-    public function __construct($id, $nom, $email, $password, $telephone, $adresse, $date_naissance, $archive, $id_role) {
-        $this->id = $id;
+    public function __construct($id_user, $nom, $prenom, $date_naissance, $telephone, $email, $mot_de_passe, $etat, $id_role) {
+        $this->id_user = $id_user;
         $this->nom = $nom;
-        $this->email = $email;
-        $this->password = $password;
-        $this->telephone = $telephone;
-        $this->adresse = $adresse;
+        $this->prenom = $prenom;
         $this->date_naissance = $date_naissance;
-        $this->archive = $archive;
+        $this->telephone = $telephone;
+        $this->email = $email;
+        $this->mot_de_passe = $mot_de_passe;
+        $this->etat = $etat;
         $this->id_role = $id_role;
     }
-    
 
     public static function authentifier($email, $password, $db) {
         $conn = $db->getConnection();
 
         // Recherche de l'utilisateur
-        $stmt = $conn->prepare("SELECT * FROM users WHERE email = ? AND archive = 0");
+        $stmt = $conn->prepare("SELECT * FROM user WHERE email = ? AND etat = 'actif'");
         $stmt->execute([$email]);
 
         $user = $stmt->fetch();
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user && password_verify($password, $user['mot_de_passe'])) {
             return $user; // Retourne l'utilisateur authentifié
         }
         return false; // Échec de l'authentification
     }
 
-    public function register() {
-        $conn = Database::getInstance()->getConnection();
-        $stmt = $conn->prepare("INSERT INTO user (nom, prenom, email, password, telephone, adresse, date_naissance, id_role) 
+    public function register($db) {
+        $conn = $db->getConnection();
+        $stmt = $conn->prepare("INSERT INTO user (nom, prenom, date_naissance, telephone, email, mot_de_passe, etat, id_role) 
                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         return $stmt->execute([
             $this->nom,
             $this->prenom,
-            $this->email,
-            password_hash($this->password, PASSWORD_DEFAULT),
-            $this->telephone,
-            $this->adresse,
             $this->date_naissance,
+            $this->telephone,
+            $this->email,
+            password_hash($this->mot_de_passe, PASSWORD_DEFAULT),
+            $this->etat,
             $this->id_role
         ]);
     }

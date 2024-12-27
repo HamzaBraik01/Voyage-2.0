@@ -47,3 +47,18 @@ INSERT INTO role (nom_role) VALUES
 ('Super Admin'),
 ('Client'),
 ('Visiteur');
+
+ALTER TABLE user
+ADD date_naissance DATE NOT NULL AFTER prenom;
+
+ALTER TABLE user
+ADD telephone VARCHAR(15) NOT NULL AFTER date_naissance;
+
+ALTER TABLE `activite`
+ADD `type` VARCHAR(100) DEFAULT NULL,
+ADD `hotel_rating` INT(1) DEFAULT NULL,
+ADD `image_url` VARCHAR(255) DEFAULT NULL;
+
+
+ALTER TABLE `activite`
+DROP COLUMN `hotel_rating`;
