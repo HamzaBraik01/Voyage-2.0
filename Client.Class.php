@@ -1,6 +1,6 @@
 <?php
 require_once 'User.Class.php';
-require_once 'Database.php';
+require_once 'DB.Class.php';
 
 class Client extends User {
     private $db;

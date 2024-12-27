@@ -25,6 +25,24 @@ class Database {
     public function getConnection() {
         return $this->conn;
     }
+    public function getTotalUsers() {
+        // Count only users with role 'Client' (id_role = 3)
+        $stmt = $this->conn->query("SELECT COUNT(*) AS total_users FROM `user` WHERE `id_role` = 3 AND `etat` = 'actif'");
+        $result = $stmt->fetch();
+        return $result['total_users'];
+    }
+
+    public function getTotalReservations() {
+        $stmt = $this->conn->query("SELECT COUNT(*) AS total_reservations FROM `reservation` WHERE `statut` = 'confirmée'");
+        $result = $stmt->fetch();
+        return $result['total_reservations'];
+    }
+
+    public function getTotalActivities() {
+        $stmt = $this->conn->query("SELECT COUNT(*) AS total_activities FROM `activite`");
+        $result = $stmt->fetch();
+        return $result['total_activities'];
+    }
 }
 
 // Test the connection

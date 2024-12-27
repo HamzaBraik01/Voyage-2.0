@@ -1,9 +1,68 @@
+<?php
+session_start();
+require_once 'DB.Class.php';
+require_once 'User.Class.php';
+require_once 'Client.Class.php';
+$error_message = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $db = new Database();
+    $conn = $db->getConnection();
+    
+    $nom = trim($_POST['nom'] ?? '');
+    $prenom = trim($_POST['prenom'] ?? '');
+    $date_naissance = $_POST['date_naissance'] ?? '';
+    $telephone = trim($_POST['telephone'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    if (empty($nom) || empty($prenom) || empty($date_naissance) || empty($telephone) || empty($email) || empty($password)) {
+        $error_message = "Tous les champs sont obligatoires.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error_message = "L'adresse email n'est pas valide.";
+    } else {
+        $stmt = $conn->prepare("SELECT id FROM user WHERE email = ?");
+        $stmt->execute([$email]);
+
+        if ($stmt->fetch()) {
+            $error_message = "Impossible de procéder à l'inscription.";
+        } else {
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+            $client = new Client([
+                'id' => null,
+                'nom' => $nom,
+                'prenom' => $prenom,
+                'email' => $email,
+                'password' => $hashed_password,
+                'telephone' => $telephone,
+                'date_naissance' => $date_naissance,
+                'archive' => 0,
+                'id_role' => 3
+            ]);
+
+            if ($client->register()) {
+                $_SESSION['user'] = [
+                    'nom' => $nom,
+                    'prenom' => $prenom,
+                    'email' => $email,
+                    'role' => 'client'
+                ];
+                header('Location: login.php');
+                exit();
+            } else {
+                $error_message = "Erreur lors de l'inscription. Veuillez réessayer.";
+            }
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VoyageHub</title>
+    <title>VoyageHub - Inscription</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -19,17 +78,15 @@
                     <span class="text-2xl font-bold text-blue-600">VoyageHub</span>
                 </div>
 
-                <!-- Desktop Menu -->
+                <!-- Menu items comme dans votre template original -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="text-gray-600 hover:text-blue-600 transition duration-300">Accueil</a>
-                    <a href="#about" class="text-gray-600 hover:text-blue-600 transition duration-300">À propos</a>
-                    <a href="#reservation" class="text-gray-600 hover:text-blue-600 transition duration-300">Réservation</a>
-                    <a href="#contact" class="text-gray-600 hover:text-blue-600 transition duration-300">Contact</a>
-                    
-                    <!-- Auth Buttons -->
+                    <a href="index.php#home" class="text-gray-600 hover:text-blue-600 transition duration-300">Accueil</a>
+                    <a href="index.php#about" class="text-gray-600 hover:text-blue-600 transition duration-300">À propos</a>
+                    <a href="index.php#reservation" class="text-gray-600 hover:text-blue-600 transition duration-300">Réservation</a>
+                    <a href="index.php#contact" class="text-gray-600 hover:text-blue-600 transition duration-300">Contact</a>
                 </div>
 
-                <!-- Mobile Menu Button and Icons -->
+                <!-- Mobile Menu Button -->
                 <div class="flex items-center space-x-4 md:hidden">
                     <button id="mobile-menu-button" class="text-gray-600 hover:text-blue-600 transition duration-300">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -41,61 +98,84 @@
 
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden pb-6">
-                <a href="#home" class="block py-3 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition duration-300">Accueil</a>
-                <a href="#about" class="block py-3 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition duration-300">À propos</a>
-                <a href="#reservation" class="block py-3 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition duration-300">Réservation</a>
-                <a href="#contact" class="block py-3 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition duration-300">Contact</a>
+                <a href="index.php#home" class="block py-3 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition duration-300">Accueil</a>
+                <a href="index.php#about" class="block py-3 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition duration-300">À propos</a>
+                <a href="index.php#reservation" class="block py-3 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition duration-300">Réservation</a>
+                <a href="index.php#contact" class="block py-3 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition duration-300">Contact</a>
             </div>
         </div>
     </nav>
+
+    <!-- Formulaire Section -->
     <section class="flex pt-52 items-center justify-center h-screen">
         <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg">
             <h2 class="text-2xl font-bold text-center text-gray-700">Sign Up</h2>
-            <form id="signup-form" action="register.php" method="POST">
+            
+            <?php if ($error_message): ?>
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                <?php echo htmlspecialchars($error_message); ?>
+            </div>
+            <?php endif; ?>
+
+            <form id="signup-form" method="POST">
                 <div class="space-y-4">
                     <div>
                         <label for="nom" class="block text-sm font-medium text-gray-600">Nom</label>
-                        <input type="text" id="nom" name="nom" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Entrez votre nom" />
+                        <input type="text" id="nom" name="nom" required 
+                                class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" 
+                                placeholder="Entrez votre nom" 
+                                value="<?php echo htmlspecialchars($_POST['nom'] ?? ''); ?>" />
                     </div>
                     <div>
                         <label for="prenom" class="block text-sm font-medium text-gray-600">Prénom</label>
-                        <input type="text" id="prenom" name="prenom" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Entrez votre prénom" />
+                        <input type="text" id="prenom" name="prenom" required 
+                                class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" 
+                                placeholder="Entrez votre prénom"
+                                value="<?php echo htmlspecialchars($_POST['prenom'] ?? ''); ?>" />
                     </div>
                     <div>
-                        <label for="username" class="block text-sm font-medium text-gray-600">Username</label>
-                        <input type="text" id="username" name="username" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Choose a username" />
+                        <label for="date_naissance" class="block text-sm font-medium text-gray-600">Date de Naissance</label>
+                        <input type="date" id="date_naissance" name="date_naissance" required 
+                                class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+                                value="<?php echo htmlspecialchars($_POST['date_naissance'] ?? ''); ?>" />
+                    </div>
+                    <div>
+                        <label for="telephone" class="block text-sm font-medium text-gray-600">Téléphone</label>
+                        <input type="tel" id="telephone" name="telephone" required 
+                                class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" 
+                                placeholder="Entrez votre numéro de téléphone"
+                                value="<?php echo htmlspecialchars($_POST['telephone'] ?? ''); ?>" />
                     </div>
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-600">Email</label>
-                        <input type="email" id="email" name="email" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Enter your email" />
+                        <input type="email" id="email" name="email" required 
+                                class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" 
+                                placeholder="Entrez votre email"
+                                value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>" />
                     </div>
                     <div>
-                        <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
-                        <input type="password" id="password" name="password" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Create a password" />
-                    </div>
-                    <div>
-                        <label for="confirm-password" class="block text-sm font-medium text-gray-600">Confirm Password</label>
-                        <input type="password" id="confirm-password" name="confirm-password" required class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" placeholder="Confirm your password" />
+                        <label for="password" class="block text-sm font-medium text-gray-600">Mot de Passe</label>
+                        <input type="password" id="password" name="password" required 
+                                class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" 
+                                placeholder="Créez un mot de passe" />
                     </div>
                 </div>
                 <button type="submit" class="w-full p-3 mt-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Sign Up</button>
             </form>
+
             <p class="text-center text-sm text-gray-600">Already have an account? <a href="login.php" class="text-blue-600 hover:underline">Sign In</a></p>
         </div>
     </section>
-
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white">
+    <footer class="mt-20 bg-gray-800 text-white">
         <div class="container mx-auto px-4 py-12">
             <div class="grid md:grid-cols-4 gap-8">
-                <!-- About Column -->
                 <div>
                     <h3 class="text-xl font-semibold mb-4">À propos</h3>
                     <p class="text-gray-400">
                         VoyageHub est votre partenaire de confiance pour des voyages inoubliables.
                     </p>
                 </div>
-                <!-- Quick Links -->
                 <div>
                     <h3 class="text-xl font-semibold mb-4">Liens rapides</h3>
                     <ul class="space-y-2">
@@ -105,7 +185,6 @@
                         <li><a href="#contact" class="text-gray-400 hover:text-white">Contact</a></li>
                     </ul>
                 </div>
-                <!-- Contact Info -->
                 <div>
                     <h3 class="text-xl font-semibold mb-4">Contact</h3>
                     <ul class="space-y-2 text-gray-400">
@@ -115,7 +194,6 @@
                         <li>Email: contact@voyagehub.fr</li>
                     </ul>
                 </div>
-                <!-- Social Media -->
                 <div>
                     <h3 class="text-xl font-semibold mb-4">Suivez-nous</h3>
                     <div class="flex space-x-4">
@@ -132,7 +210,6 @@
     </footer>
 
     <script>
-        /*-----------------------------------------------------------------------*/
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
 
@@ -147,16 +224,6 @@
                 mobileMenu.classList.add('hidden');
             });
         }
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
     </script>
 </body>
 </html>
