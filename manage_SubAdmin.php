@@ -36,7 +36,7 @@
                     <h1 class="text-2xl font-semibold text-gray-900" id="section-title">Dashboard Overview</h1>
                     <div class="flex items-center">
                         <span class="text-gray-700 mr-4">Welcome to your dashbored!</span>
-                        <!-- <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Logout</button> -->
+                        <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Logout</button>
                     </div>
                 </div>
             </header>
