@@ -85,8 +85,9 @@
         </section>
 
         <!-- Best Offers Section -->
+        
         <section class="py-16 bg-gray-100">
-            <div class="text-center mb-10">
+<div class="text-center mb-10">
                 <h2 class="text-3xl font-bold">Best Offers</h2>
                 <p class="text-gray-600">Check out our top-rated tours</p>
             </div>
@@ -275,8 +276,7 @@
             </div>
         </section>
 
-        <!-- Reservation Section -->
-        <section id="reservation" class="py-16 px-4 bg-gray-100">
+        <!-- <section id="reservation" class="py-16 px-4 bg-gray-100">
             <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
                 <h2 class="text-2xl font-bold text-gray-800 mb-6">Make Your Reservation</h2>
         
@@ -323,7 +323,6 @@
                         </div>
                     </div>
         
-                    <!-- Contact Information -->
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -347,7 +346,7 @@
                     </div>
                 </form>
             </div>
-        </section>
+        </section> -->
 
         <!-- Contact Section -->
         <section id="contact" class="py-16 px-4">
