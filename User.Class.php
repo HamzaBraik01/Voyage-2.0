@@ -1,5 +1,5 @@
 <?php
-
+require_once 'DB.Class.php';
 abstract class User {
     protected $id_user;
     protected $nom;
@@ -11,20 +11,31 @@ abstract class User {
     protected $archive;
     protected $id_role;
 
-    public function __construct($data = []) {
-        foreach($data as $key => $value) {
-            if(property_exists($this, $key)) {
-                $this->$key = $value;
-            }
-        }
+    public function __construct($id, $nom, $email, $password, $telephone, $adresse, $date_naissance, $archive, $id_role) {
+        $this->id = $id;
+        $this->nom = $nom;
+        $this->email = $email;
+        $this->password = $password;
+        $this->telephone = $telephone;
+        $this->adresse = $adresse;
+        $this->date_naissance = $date_naissance;
+        $this->archive = $archive;
+        $this->id_role = $id_role;
     }
+    
 
-    public function authentifier() {
-        // Basic authentication logic
-        $conn = Database::getInstance()->getConnection();
-        $stmt = $conn->prepare("SELECT * FROM user WHERE email = ? AND password = ? AND archive = 0");
-        $stmt->execute([$this->email, $this->password]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+    public static function authentifier($email, $password, $db) {
+        $conn = $db->getConnection();
+
+        // Recherche de l'utilisateur
+        $stmt = $conn->prepare("SELECT * FROM users WHERE email = ? AND archive = 0");
+        $stmt->execute([$email]);
+
+        $user = $stmt->fetch();
+        if ($user && password_verify($password, $user['password'])) {
+            return $user; // Retourne l'utilisateur authentifié
+        }
+        return false; // Échec de l'authentification
     }
 
     public function register() {
