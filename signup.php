@@ -1,60 +1,28 @@
 <?php
-session_start();
 require_once 'DB.Class.php';
-require_once 'User.Class.php';
-require_once 'Client.Class.php';
-$error_message = '';
+require_once 'Authentication.Class.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $db = new Database();
-    $conn = $db->getConnection();
+    $auth = new Authentication($db);
     
-    $nom = trim($_POST['nom'] ?? '');
-    $prenom = trim($_POST['prenom'] ?? '');
-    $date_naissance = $_POST['date_naissance'] ?? '';
-    $telephone = trim($_POST['telephone'] ?? '');
-    $email = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
+    $userData = [
+        'nom' => $_POST['nom'],
+        'prenom' => $_POST['prenom'],
+        'date_naissance' => $_POST['date_naissance'],
+        'telephone' => $_POST['telephone'],
+        'email' => $_POST['email'],
+        'password' => $_POST['password']
+    ];
 
-    if (empty($nom) || empty($prenom) || empty($date_naissance) || empty($telephone) || empty($email) || empty($password)) {
-        $error_message = "Tous les champs sont obligatoires.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error_message = "L'adresse email n'est pas valide.";
+    $result = $auth->register($userData);
+    
+    if ($result['success']) {
+        header('Location: login.php');
+        exit;
     } else {
-        $stmt = $conn->prepare("SELECT id FROM user WHERE email = ?");
-        $stmt->execute([$email]);
-
-        if ($stmt->fetch()) {
-            $error_message = "Impossible de procéder à l'inscription.";
-        } else {
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-            $client = new Client([
-                'id' => null,
-                'nom' => $nom,
-                'prenom' => $prenom,
-                'email' => $email,
-                'password' => $hashed_password,
-                'telephone' => $telephone,
-                'date_naissance' => $date_naissance,
-                'archive' => 0,
-                'id_role' => 3
-            ]);
-
-            if ($client->register()) {
-                $_SESSION['user'] = [
-                    'nom' => $nom,
-                    'prenom' => $prenom,
-                    'email' => $email,
-                    'role' => 'client'
-                ];
-                header('Location: login.php');
-                exit();
-            } else {
-                $error_message = "Erreur lors de l'inscription. Veuillez réessayer.";
-            }
-        }
+        $error = $result['message']; 
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -110,11 +78,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <section class="flex pt-52 items-center justify-center h-screen">
         <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg">
             <h2 class="text-2xl font-bold text-center text-gray-700">Sign Up</h2>
-            
-            <?php if ($error_message): ?>
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-                <?php echo htmlspecialchars($error_message); ?>
-            </div>
+            <?php if (isset($error)): ?>
+                <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
+                    <?php echo htmlspecialchars($error); ?>
+                </div>
             <?php endif; ?>
 
             <form id="signup-form" method="POST">
@@ -123,35 +90,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <label for="nom" class="block text-sm font-medium text-gray-600">Nom</label>
                         <input type="text" id="nom" name="nom" required 
                                 class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" 
-                                placeholder="Entrez votre nom" 
-                                value="<?php echo htmlspecialchars($_POST['nom'] ?? ''); ?>" />
+                                placeholder="Entrez votre nom" />
                     </div>
                     <div>
                         <label for="prenom" class="block text-sm font-medium text-gray-600">Prénom</label>
                         <input type="text" id="prenom" name="prenom" required 
                                 class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" 
-                                placeholder="Entrez votre prénom"
-                                value="<?php echo htmlspecialchars($_POST['prenom'] ?? ''); ?>" />
+                                placeholder="Entrez votre prénom" />
                     </div>
                     <div>
                         <label for="date_naissance" class="block text-sm font-medium text-gray-600">Date de Naissance</label>
                         <input type="date" id="date_naissance" name="date_naissance" required 
-                                class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none"
-                                value="<?php echo htmlspecialchars($_POST['date_naissance'] ?? ''); ?>" />
+                                class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" />
                     </div>
                     <div>
                         <label for="telephone" class="block text-sm font-medium text-gray-600">Téléphone</label>
                         <input type="tel" id="telephone" name="telephone" required 
                                 class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" 
-                                placeholder="Entrez votre numéro de téléphone"
-                                value="<?php echo htmlspecialchars($_POST['telephone'] ?? ''); ?>" />
+                                placeholder="Entrez votre numéro de téléphone"/>
                     </div>
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-600">Email</label>
                         <input type="email" id="email" name="email" required 
                                 class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none" 
-                                placeholder="Entrez votre email"
-                                value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>" />
+                                placeholder="Entrez votre email"/>
                     </div>
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-600">Mot de Passe</label>

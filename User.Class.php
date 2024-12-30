@@ -12,7 +12,7 @@ abstract class User {
     protected $etat;
     protected $id_role;
 
-    public function __construct($id_user, $nom, $prenom, $date_naissance, $telephone, $email, $mot_de_passe, $etat, $id_role) {
+    /*public function __construct($id_user, $nom, $prenom, $date_naissance, $telephone, $email, $mot_de_passe, $etat, $id_role) {
         $this->id_user = $id_user;
         $this->nom = $nom;
         $this->prenom = $prenom;
@@ -22,7 +22,7 @@ abstract class User {
         $this->mot_de_passe = $mot_de_passe;
         $this->etat = $etat;
         $this->id_role = $id_role;
-    }
+    }*/
 
     public static function authentifier($email, $password, $db) {
         $conn = $db->getConnection();

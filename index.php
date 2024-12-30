@@ -26,13 +26,13 @@
                     <a href="#contact" class="text-gray-600 hover:text-blue-600 transition duration-300">Contact</a>
                     
                     <div class="flex items-center space-x-4">
-                        <a href="#" class="flex items-center text-gray-600 hover:text-blue-600 transition duration-300">
+                        <a href="./login.php" class="flex items-center text-gray-600 hover:text-blue-600 transition duration-300">
                             <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                             <span>Connexion</span>
                         </a>
-                        <a href="#" class="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+                        <a href="./signup.php" class="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
                             <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                             </svg>
@@ -73,7 +73,6 @@
 
     <!-- Main Content -->
     <main class="flex-grow pt-16">
-        <!-- Hero Section -->
         <section id="home" class="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-20">
             <div class="container mx-auto px-4 text-center">
                 <h1 class="text-4xl md:text-6xl font-bold mb-6">Découvrez le monde avec nous</h1>
@@ -84,10 +83,9 @@
             </div>
         </section>
 
-        <!-- Best Offers Section -->
         
         <section class="py-16 bg-gray-100">
-<div class="text-center mb-10">
+            <div class="text-center mb-10">
                 <h2 class="text-3xl font-bold">Best Offers</h2>
                 <p class="text-gray-600">Check out our top-rated tours</p>
             </div>
@@ -167,33 +165,7 @@
                 </div>
             </div>
         </section>
-        <div class="max-w-6xl mx-auto">
-  
-  <!-- Activities Container -->
-  <div id="activitiesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Sample Activity Card -->
-      <div class="bg-white shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition">
-          <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/5c/d2/19/caption.jpg?w=1200&h=-1&s=1" alt="Turkey" class="w-full h-48 object-cover">
-          <div class="p-6">
-              <h3 class="text-xl font-semibold">Paris City Break</h3>
-              <p class="text-gray-600">3 jours / 2 nuits</p>
-              <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm">Vol + Hôtel</span>
-              <div class="mt-4 flex items-center">
-                  <span class="stars">★★★★★</span><span class="text-gray-600 ml-2">(120 avis)</span>
-              </div>
-              <div class="flex items-center text-gray-600 mt-2">
-                  <span>Hôtel 4 étoiles inclus</span>
-              </div>
-              <div class="flex items-center text-gray-600 mt-2">
-                  <span>À partir de 599€/personne</span>
-              </div>
-              <button class="mt-6 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">Réserver</button>
-          </div>
-      </div>
-  </div>
-</div>
 
-        <!-- Why Us Section -->
         <section class="py-16 bg-white">
             <div class="text-center mb-10">
                 <h2 class="text-3xl font-bold">Why Tourizto</h2>
@@ -207,7 +179,6 @@
                     </div>
                     <h3 class="text-lg font-bold">Personalized Matching</h3>
                     <p class="text-gray-600">We can provide up to 3 experienced travel specialists who fit best.</p>
-                    
                 </div>
                 <div class="flex flex-col items-center text-center p-4">
                     <div class="bg-orange-500 text-white p-4 rounded-full mb-4">
@@ -230,7 +201,6 @@
             </div>
         </section>
 
-        <!-- Customer Reviews Section -->
         <section class="py-16 bg-gray-100">
             <div class="text-center mb-10">
                 <h2 class="text-3xl font-bold">Customer Reviews</h2>
@@ -274,81 +244,7 @@
 
                 </div>
             </div>
-        </section>
-
-        <!-- <section id="reservation" class="py-16 px-4 bg-gray-100">
-            <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6">Make Your Reservation</h2>
-        
-                <div class="mb-8">
-                    <img src="https://metropolitan.realestate/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2024/02/MALDIVES.jpg.webp" alt="Luxury accommodation" class="w-full h-48 object-cover rounded-lg">
-                </div>
-        
-                <form class="space-y-6">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
-                                Check-in Date
-                            </label>
-                            <input type="date" required class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
-                                Check-out Date
-                            </label>
-                            <input type="date" required class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                    </div>
-        
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
-                                Number of family
-                            </label>
-                            <select required class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                <option value="">Select family</option>
-                                <option value="1">1 family</option>
-                                <option value="2">2 family</option>
-                                <option value="3">3 family</option>
-                                <option value="4">4 family</option>
-                                <option value="5">5 family</option>
-                                <option value="6">6 family</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
-                                Full Name
-                            </label>
-                            <input type="text" required class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter your full name">
-                        </div>
-                    </div>
-        
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
-                                Email Address
-                            </label>
-                            <input type="email" required class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="your@email.com">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
-                                Phone Number
-                            </label>
-                            <input type="tel" required class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="+1 (555) 000-0000">
-                    </div>
-                </div>
-                    <div class="space-y-4">
-                        <div class="flex justify-end">
-                            <button type="submit" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200">
-                                Confirm Reservation
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </section> -->
-
-        <!-- Contact Section -->
+        </section>  
         <section id="contact" class="py-16 px-4">
             <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
                 <h2 class="text-2xl font-bold text-gray-800 mb-6">Contact Us</h2>
@@ -365,7 +261,6 @@
                             placeholder="Enter your full name"
                         >
                     </div>
-        
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -401,7 +296,7 @@
                             placeholder="What is your message about?"
                         >
                     </div>
-        
+                    
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">
                             Message

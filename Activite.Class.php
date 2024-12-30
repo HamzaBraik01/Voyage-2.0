@@ -12,7 +12,7 @@ class Activite {
     private $type;
     private $image_url;
 
-    public function __construct($titre = '', $description = '', $prix = 0, $date_debut = '', $date_fin = '', $place_dispo = 0, $type = null, $image_url = null) {
+    public function __construct($titre , $description , $prix , $date_debut , $date_fin , $place_dispo , $type , $image_url ) {
         $this->titre = $titre;
         $this->description = $description;
         $this->prix = $prix;

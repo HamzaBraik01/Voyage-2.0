@@ -125,38 +125,7 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get all navigation links and content sections
-            const navLinks = document.querySelectorAll('#sidebar-nav a');
-            const sections = document.querySelectorAll('.section-content');
-            const sectionTitle = document.getElementById('section-title');
-
-            // Function to show selected section and hide others
-            function showSection(sectionId) {
-                sections.forEach(section => {
-                    section.classList.add('hidden');
-                });
-                document.getElementById(sectionId).classList.remove('hidden');
-                
-                // Update active link styling
-                navLinks.forEach(link => {
-                    link.classList.remove('bg-blue-600');
-                    if(link.dataset.section === sectionId) {
-                        link.classList.add('bg-blue-600');
-                        sectionTitle.textContent = link.textContent.trim();
-                    }
-                });
-            }
-
-            // Add click event listeners to all navigation links
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const sectionId = link.dataset.section;
-                    showSection(sectionId);
-                });
-            });
-        });
+        
     </script>
 </body>
 </html>

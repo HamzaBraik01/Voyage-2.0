@@ -62,3 +62,10 @@ ADD `image_url` VARCHAR(255) DEFAULT NULL;
 
 ALTER TABLE `activite`
 DROP COLUMN `hotel_rating`;
+
+
+ALTER TABLE `reservation`
+ADD CONSTRAINT `fk_reservation_activite`
+FOREIGN KEY (`id_activite`)
+REFERENCES `activite` (`id_activite`)
+ON DELETE CASCADE;

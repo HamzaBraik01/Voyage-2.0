@@ -1,22 +1,29 @@
 <?php
 require_once 'DB.Class.php';
 class Reservation {
-    private $id_reservation;
-    private $id_user;
-    private $id_activite;
-    private $statut;
-    private $date_reservation;
-
-    public function ajouterReservation($db, $id_user, $id_activite) {
-        $conn = $db->getConnection();
-        $stmt = $conn->prepare("INSERT INTO reservation (id_user, id_activite) VALUES (?, ?)");
-        return $stmt->execute([$id_user, $id_activite]);
+    private $db;
+    
+    public function __construct($db) {
+        $this->db = $db;
     }
-
-    public static function obtenirReservations($db) {
-        $conn = $db->getConnection();
-        $stmt = $conn->query("SELECT * FROM reservation");
-        return $stmt->fetchAll();
+    
+    public function getReservationsWithUserInfo() {
+        $conn = $this->db->getConnection();
+        $query = "SELECT r.*, u.nom, u.prenom, a.titre as activite_titre 
+                    FROM reservation r 
+                    INNER JOIN user u ON r.id_user = u.id_user 
+                    INNER JOIN activite a ON r.id_activite = a.id_activite
+                    WHERE u.id_role = 3 
+                    ORDER BY r.date_reservation DESC";
+        
+        $stmt = $conn->query($query);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function updateReservationStatus($id_reservation, $status) {
+        $conn = $this->db->getConnection();
+        $stmt = $conn->prepare("UPDATE reservation SET statut = ? WHERE id_reservation = ?");
+        return $stmt->execute([$status, $id_reservation]);
     }
 }
 ?>
